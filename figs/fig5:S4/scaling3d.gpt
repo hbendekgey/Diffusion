@@ -1,0 +1,49 @@
+set term postscript enhanced color solid font "Times-Roman,24"
+set term postscript fontfile "cmmi10.pfb"
+mu = -2.88
+omega = 0.52
+mu0 = mu/omega
+nc = 0.84
+set logs xy
+set output 'scaling3d.eps'
+set multiplot
+set key top left reverse Left samplen 1.5 maxrows 4 font "Timnes-Roman,22"
+set ytics offset 0.5,0
+set rmargin 0
+set tmargin 0
+set lmargin 7.0
+set bmargin 3.0
+set yrange [0.08:2e4]
+set xrange [0.0015:9e9]
+set xtics ("10^{-2}" 0.01, "1" 1,"10^2" 100, "10^4" 1e4,  "10^6" 1e6, "10^8" 1e8) 
+set xlabel "{/Times-Italic D}_{obs} / {/Times-Italic D}_{p} |({/Times-Italic ~{n}{\303}} \261 {/Times-Italic ~{n}{\303}}_c)/{/Times-Italic ~{n}{\303}}_c|^{\261 {/CMMI10 \271}/{/CMMI10 \303}}" offset 0,0.2
+set ylabel "{/Times-Italic D}_{eff} / {/Times-Italic D}_{p} |({/Times-Italic ~{n}{\303}} \261 {/Times-Italic ~{n}{\303}}_c)/{/Times-Italic ~{n}{\303}}_c|^{\261 {/CMMI10 \271}}" offset 3.5,0
+p "< awk '{if ($4 == 0.6 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.60", \
+"< awk '{if ($4 == 0.65 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.65", \
+"< awk '{if ($4 == 0.7 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.70", \
+"< awk '{if ($4 == 0.75 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.75", \
+"< awk '{if ($4 == 0.8 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.8", \
+"< awk '{if ($4 == 0.81 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.81", \
+"< awk '{if ($4 == 0.82 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.82", \
+"< awk '{if ($4 == 0.83 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/100):($1*(1-$4/nc)**mu*exp(4/3*pi*$4)):($2*(1-$4/nc)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.83", \
+"< awk '{if ($4 == 0.86 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/100):($1*($4/nc-1)**mu*exp(4/3*pi*$4)):($2*($4/nc-1)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.86", \
+"< awk '{if ($4 == 0.88 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/100):($1*($4/nc-1)**mu*exp(4/3*pi*$4)):($2*($4/nc-1)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.88", \
+"< awk '{if ($4 == 0.9 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/100):($1*($4/nc-1)**mu*exp(4/3*pi*$4)):($2*($4/nc-1)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.90", \
+"< awk '{if ($4 == 0.95 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/100):($1*($4/nc-1)**mu*exp(4/3*pi*$4)):($2*($4/nc-1)**mu*exp(4/3*pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.95"
+
+set tmargin at screen 0.6
+set bmargin at screen 0.3
+set rmargin at screen 0.99
+set lmargin at screen 0.65
+set xlabel "{/Times-Italic D}_{obs} / {/Times-Italic D}_{p}" offset 0,0.5
+set ylabel "{/Times-Italic D}_{eff} / {/Times-Italic D}_{p}" offset 3.5,-0.5
+set yrange [0.0004:0.08]
+set xrange [1e-6:0.02]
+set ytics offset 0.8,0
+#set ytics ("10^{-2}" 1e-2, "10^{-3}" 1e-3) offset 0.8,0
+set xtics ("10^{-4}" 1e-4, "10^{-2}" 1e-2) offset 0,0.3
+set key top left Left
+f(x) = A*x**c
+c = 0.5
+fit f(x)  "< awk '{if ($4 == 0.84 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4))  via A,c
+p "< awk '{if ($4 == 0.84 && $3 < 1) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w e  lw 2 t "{/Times-Italic ~{n}{\303}} = 0.84 {/Symbol \273} {/Times-Italic ~{n}{\303}}_c" , f(x)  not

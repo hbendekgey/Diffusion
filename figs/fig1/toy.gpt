@@ -1,0 +1,14 @@
+set term postscript enhanced color solid font "Times-Roman,24"
+set output 'toy.eps'
+set size square
+set term postscript size 12,12
+set tmargin 0.01
+set bmargin 0.01
+set lmargin 0.01
+set rmargin 0.01
+unset tics
+unset key
+set xrange[900:980]
+set yrange[550:630]
+p "< head walker.dat -n 5000" u 1:2 w l lt rgb "green" , \
+"obst.dat" u 1:2:(10) w circles lc rgb "red" fill solid noborder

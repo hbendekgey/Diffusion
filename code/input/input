@@ -1,0 +1,7 @@
+2000	//System size
+10      //Radius of obstacles
+1400	//Number of particles
+1000	//Number of blocks
+1000	//Saved measurements per block
+1000	//Frequency of measurements
+0	//Random seed (if 0 it is read from /dev/urandom)		

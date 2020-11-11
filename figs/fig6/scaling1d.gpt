@@ -1,0 +1,30 @@
+set term postscript enhanced color solid font "Times-Roman,24"
+set term postscript fontfile "cmmi10.pfb"
+set logs xy
+set output 'scaling1d.eps'
+set key bottom right reverse Left samplen 1.5 at screen 0.92,0.14
+set ytics offset 0.5,0
+set xtics offset 0,0.5
+set rmargin 0.01
+set tmargin 0.01
+set lmargin 6.0
+set bmargin 2.5
+set yrange [0.005:2]
+set xrange [0.005:90]
+#set ytics offset 0.3,0
+#set xtics ("10^{-4}" 1e-4, "10^{-3}" 1e-3, "10^{-2}" 1e-2,"10^{-1}" 1e-1, "1" 1,  "10^6" 1e6) offset 0,0.3
+#set xlabel "{/Times-Italic D}_{obs}|{/Times-Italic n}^* \261 {/Times-Italic n}@^*_c|^{\261 {/CMMI10 \260}}"
+#set ylabel "{/Times-Italic D}_{eff}|{/Times-Italic n}^* \261 {/Times-Italic n}@^*_c|^{\261 {/CMMI10 \260}/ {/CMMI10 \257}}"
+g(x) = x/(1+x)
+
+set xlabel "{/Times-Italic D}_{obs} / {/Times-Italic D}_{p} |({/CMMI10 \301} - {/CMMI10 \301}_c)/{/CMMI10 \301}_c|^{-1}" offset 2,1
+set ylabel "{/Times-Italic D}_{eff} / {/Times-Italic D}_{p}" offset 3.5,0
+
+p "< awk '{if ($4 == 0.01) print $0}' 1d.dat | sort -n -k 3" u ($3**2/(1-exp(-2*$4))):($1*exp(2*$4)):($2*exp(pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.01", \
+"< awk '{if ($4 == 0.02) print $0}' 1d.dat | sort -n -k 3" u ($3**2/(1-exp(-2*$4))):($1*exp(2*$4)):($2*exp(pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.02", \
+"< awk '{if ($4 == 0.04) print $0}' 1d.dat | sort -n -k 3" u ($3**2/(1-exp(-2*$4))):($1*exp(2*$4)):($2*exp(pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.04", \
+"< awk '{if ($4 == 0.08) print $0}' 1d.dat | sort -n -k 3" u ($3**2/(1-exp(-2*$4))):($1*exp(2*$4)):($2*exp(pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.08", \
+"< awk '{if ($4 == 0.16) print $0}' 1d.dat | sort -n -k 3" u ($3**2/(1-exp(-2*$4))):($1*exp(2*$4)):($2*exp(pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.16", \
+"< awk '{if ($4 == 0.32) print $0}' 1d.dat | sort -n -k 3" u ($3**2/(1-exp(-2*$4))):($1*exp(2*$4)):($2*exp(pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.32", \
+"< awk '{if ($4 == 0.64) print $0}' 1d.dat | sort -n -k 3" u ($3**2/(1-exp(-2*$4))):($1*exp(2*$4)):($2*exp(pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.64", \
+g(x) lw 1 t "{/Times-Italic g}({/Times-Italic x})"

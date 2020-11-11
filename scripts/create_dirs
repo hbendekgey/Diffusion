@@ -1,0 +1,27 @@
+#!/bin/bash
+# Read a string with spaces using for loop
+# $1 is the density
+density=$1
+steps=(1 0.5 0.3 0.2 0.1 0.05 0.03 0.02)
+mkdir density${density}
+cd density${density}
+
+mkdir L1000N360 # 1000x1000, 360 particles
+cd L1000N360
+cp ../../calc_dr2 .
+for step in ${steps[@]}
+do
+    mkdir step${step}
+    cd step${step}
+    for j in `seq -f "%03g" 1 48`
+    do
+        mkdir sim${j}
+        cd sim${j}
+        cp ../../../../input .
+        cp ../../../../powt.txt .
+        cd ..
+    done
+    cd ..
+done
+cd ..
+cd ..

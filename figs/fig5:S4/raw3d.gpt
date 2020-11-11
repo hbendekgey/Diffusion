@@ -1,0 +1,32 @@
+set term postscript enhanced color solid font "Times-Roman,24"
+#set term postscript fontfile "cmmi10.pfb"
+set logs xy
+set output 'raw3d.eps'
+set key bottom right reverse Left samplen 1.5 at screen 1.02,0.14
+set ytics offset 0.5,0
+set rmargin 0.01
+set tmargin 0.01
+set lmargin 6.0
+set bmargin 2.5
+set yrange [:0.15]
+set xrange [3e-6:0.02]
+set ytics offset 0.3,0
+set xtics ("10^{-4}" 1e-4, "10^{-3}" 1e-3, "10^{-2}" 1e-2,"10^{-1}" 1e-1, "1" 1,  "10^6" 1e6) offset 0,0.3
+#set xlabel "{/Times-Italic D}_{obs}|{/Times-Italic n}^* \261 {/Times-Italic n}@^*_c|^{\261 {/CMMI10 \260}}"
+#set ylabel "{/Times-Italic D}_{eff}|{/Times-Italic n}^* \261 {/Times-Italic n}@^*_c|^{\261 {/CMMI10 \260}/ {/CMMI10 \257}}"
+set xlabel "{/Times-Italic D}_{obs} / {/Times-Italic D}_{p}" offset 2,1
+set ylabel "{/Times-Italic D}_{eff} / {/Times-Italic D}_{p}" offset 4.5,0
+
+p "< awk '{if ($4 == 0.6) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.60", \
+"< awk '{if ($4 == 0.65) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.65", \
+"< awk '{if ($4 == 0.7) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.70", \
+"< awk '{if ($4 == 0.75) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.75", \
+"< awk '{if ($4 == 0.8) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.80", \
+"< awk '{if ($4 == 0.81) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.81", \
+"< awk '{if ($4 == 0.82) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.82", \
+"< awk '{if ($4 == 0.83) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.83", \
+"< awk '{if ($4 == 0.84) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.84", \
+"< awk '{if ($4 == 0.86) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lc rgb "dark-yellow" lw 2 t "{/Times-Italic ~{n}{\303}} = 0.86", \
+"< awk '{if ($4 == 0.88) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.88", \
+"< awk '{if ($4 == 0.9) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.90", \
+"< awk '{if ($4 == 0.95) print $0}' 3d.dat | sort -n -k 3" u ($3**2/100):($1*exp(4/3*pi*$4)):($2*exp(4/3*pi*$4)) w errorl lw 2 t "{/Times-Italic ~{n}{\303}} = 0.95"

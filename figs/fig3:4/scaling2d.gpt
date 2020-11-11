@@ -1,0 +1,50 @@
+set term postscript enhanced color solid font "Times-Roman,24"
+set term postscript fontfile "cmmi10.pfb"
+mu = -1.31
+omega = 0.274
+mu0 = mu/omega
+nc = 0.359
+set logs xy
+set output 'scaling2d.eps'
+set multiplot
+set key top left reverse Left samplen 1.5 maxrows 4 font "Timnes-Roman,22"
+set ytics offset 0.5,0
+set rmargin 0
+set tmargin 0
+set lmargin 5.0
+set bmargin 3.0
+set yrange [0.04:80]
+set xrange [0.001:6e6]
+set xtics ("10^{-2}" 0.01, "1" 1,"10^2" 100, "10^4" 1e4,  "10^6" 1e6) 
+set xlabel "{/Times-Italic D}_{obs} / {/Times-Italic D}_{p} |({/Times-Italic ~{n}{\303}} \261 {/Times-Italic ~{n}{\303}}_c)/{/Times-Italic ~{n}{\303}}_c|^{\261 {/CMMI10 \271}/{/CMMI10 \303}}" offset 0,0.2
+set ylabel "{/Times-Italic D}_{eff} / {/Times-Italic D}_{p} |({/Times-Italic ~{n}{\303}} \261 {/Times-Italic ~{n}{\303}}_c)/{/Times-Italic ~{n}{\303}}_c|^{\261 {/CMMI10 \271}}" offset 3.5,0
+#set label "{/CMMI10 \013} = 0.274 from critical fit" at screen 0.15,0.95
+#set label "{/CMMI10 \304} = 1.31 from literature" at screen 0.15,0.85
+p "< awk '{if ($4 == 0.2) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.20", \
+"< awk '{if ($4 == 0.25) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.25", \
+"< awk '{if ($4 == 0.3) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.30", \
+"< awk '{if ($4 == 0.31) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.31", \
+"< awk '{if ($4 == 0.32) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.32", \
+"< awk '{if ($4 == 0.33) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.33", \
+"< awk '{if ($4 == 0.34) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.34", \
+"< awk '{if ($4 == 0.35) print $0}' 2d.dat | sort -n -k 3" u ((1-$4/nc)**mu0*$3**2/10):($1*(1-$4/nc)**mu*exp(pi*$4)):($2*(1-$4/nc)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.35", \
+"< awk '{if ($4 == 0.38) print $0}' 2d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/10):($1*($4/nc-1)**mu*exp(pi*$4)):($2*($4/nc-1)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.38", \
+"< awk '{if ($4 == 0.4) print $0}' 2d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/10):($1*($4/nc-1)**mu*exp(pi*$4)):($2*($4/nc-1)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.40", \
+"< awk '{if ($4 == 0.45) print $0}' 2d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/10):($1*($4/nc-1)**mu*exp(pi*$4)):($2*($4/nc-1)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.45", \
+"< awk '{if ($4 == 0.5) print $0}' 2d.dat | sort -n -k 3" u (($4/nc-1)**mu0*$3**2/10):($1*($4/nc-1)**mu*exp(pi*$4)):($2*($4/nc-1)**mu*exp(pi*$4)) w errorl t "{/Times-Italic ~{n}{\303}}=0.50"
+
+set tmargin at screen 0.6
+set bmargin at screen 0.3
+set rmargin at screen 0.99
+set lmargin at screen 0.65
+set xlabel "{/Times-Italic D}_{obs} / {/Times-Italic D}_{p}" offset 0,0.5
+set ylabel "{/Times-Italic D}_{eff} / {/Times-Italic D}_{p}" offset 3.5,0
+set yrange [0.02:0.7]
+set xrange [1e-5:0.2]
+set ytics offset 0.8,0
+set xtics ("10^{-4}" 1e-4, "10^{-2}" 1e-2) offset 0,0.3
+set key top left Left
+f(x) = A*x**c
+c = 0.25
+fit f(x)  "< awk '{if ($4 == 0.359) print $0}' 2d.dat | sort -n -k 3" u ($3**2/10):($1*exp(pi*$4)):($2*exp(pi*$4))  via A,c
+p "< awk '{if ($4 == 0.359) print $0}' 2d.dat | sort -n -k 3" u ($3**2/10):($1*exp(pi*$4)):($2*exp(pi*$4)) w e  lw 2 t "{/Times-Italic ~{n}{\303}} = 0.359 {/Symbol \273} {/Times-Italic ~{n}{\303}}_c" , f(x)  not

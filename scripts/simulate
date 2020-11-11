@@ -1,0 +1,28 @@
+#!/bin/bash
+# $1 is the density
+# $2 is the simulation number
+# Read a string with spaces using for loop
+density=$1
+steps=(1 0.5 0.3 0.2 0.1 0.05 0.03 0.02)
+cd density${density}
+
+cd L1000N360
+for step in ${steps[@]}
+do
+    cd step${step}
+    sim=$2
+    cd sim`printf %03d $sim`
+    nice -10 ../../../../cdiff $step $density >> log.txt
+    cd ..
+    cd ..
+done
+for step in ${steps[@]}
+do
+    cd step${step}
+    sim=$(($2+24))
+    cd sim`printf %03d $sim`
+    nice -10 ../../../../cdiff $step $density >> log.txt
+    cd ..
+    cd ..
+done
+cd ..

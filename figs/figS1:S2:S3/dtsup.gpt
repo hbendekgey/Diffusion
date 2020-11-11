@@ -1,0 +1,40 @@
+set term postscript enhanced color solid font "Times-Roman,24"
+
+set logs x
+set output 'dtsup.eps'
+set multiplot
+set key bottom left reverse Left samplen 2
+set tmargin 0.01
+set bmargin 2
+set rmargin 0.01
+set lmargin 5.0
+set yrange[0:0.99]
+set xrange[0.5:2000000000]
+set xtics ("2^5" 32, "2^{10}" 1024,  "2^{15}" 32768, "2^{20}" 1048576, "2^{25}" 33554432, "2^{30}" 1073741824) offset 0,0.3
+set ytics 0,0.2 offset 0.7,0
+set xlabel "{/Times-Italic t}" offset 4,1
+set ylabel "{/Times-Italic D}({/Times-Italic t})/{/Times-Italic D}_{p}" offset 2.8,0
+set label "{/Times-Italic D}_{obs}/{/Times-Italic D}_{p}" at screen 0.2,0.55
+set label "{/Times-Italic ~{n}{\303}} = 0.400 > {/Times-Italic ~{n}{\303}}_c" at screen 0.130,0.95
+p "< awk '{if ($2 == 1) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 t "10^{-1.0}", \
+"< awk '{if ($2 == 0.5) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 t "10^{-1.6}", \
+"< awk '{if ($2 == 0.3) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 t "10^{-2.0}", \
+"< awk '{if ($2 == 0.2) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 t "10^{-2.4}", \
+"< awk '{if ($2 == 0.1) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 t "10^{-3.0}", \
+"< awk '{if ($2 == 0.05) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 lc rgb "brown" t "10^{-3.6}", \
+"< awk '{if ($2 == 0.03) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 t "10^{-4.0}", \
+"< awk '{if ($2 == 0.02) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 t "10^{-4.4}", \
+
+set tmargin at screen 0.95
+set bmargin at screen 0.6
+set lmargin at screen 0.53
+set rmargin at screen 0.90
+set xrange [2**16:]
+set yrange [0.136:0.172]
+set ytics 0.13,0.01
+unset label
+set key top right
+fit [2**25:] c "< awk '{if ($2 == 0.2) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) via c
+set y2tics ("" 0.18, "{/Times-Italic D}_{eff}" c, "" 0.19)
+
+p "< awk '{if ($2 == 0.2) print $0}' /data1/crowdiff/simulaciones-cierzo/2d/density0.004/L1000N360/summary.dat" u 1:($3/$1*exp(pi*$5*100)):($4/$1*exp(pi*$5*100)) w e lw 2 lt 4 t "{/Times-Italic D}_{obs}/{/Times-Italic D}_{p}=10^{-2.4}", c lt -1 not
